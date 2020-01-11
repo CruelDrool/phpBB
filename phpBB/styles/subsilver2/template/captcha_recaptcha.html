@@ -5,16 +5,7 @@
 	<tr>
 		<td class="row1"><b class="genmed">{L_CONFIRM_CODE}:</b><br /><span class="gensmall">{L_RECAPTCHA_EXPLAIN}</span></td>
 		<td class="row2">
-		<script type="text/javascript">
-		// <![CDATA[
-		var RecaptchaOptions = {
-			lang : '{LA_RECAPTCHA_LANG}',
-			theme : 'clean',
-			tabindex : <!-- IF $CAPTCHA_TAB_INDEX -->{$CAPTCHA_TAB_INDEX}<!-- ELSE -->10<!-- ENDIF -->
-		};
-		// ]]>
-		</script>
-		<script type="text/javascript" src="{RECAPTCHA_SERVER}/challenge?k={RECAPTCHA_PUBKEY}{RECAPTCHA_ERRORGET}" ></script>
+		<script type="text/javascript" src="{RECAPTCHA_SERVER}/api.js?hl={L_RECAPTCHA_LANG}" async defer></script>
 		<script type="text/javascript">
 		// <![CDATA[
 		<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
@@ -22,11 +13,9 @@
 		<!-- ENDIF -->
 		// ]]>
 		</script>
-
+			<div class="g-recaptcha" data-sitekey="{RECAPTCHA_PUBKEY}" data-tabindex="<!-- IF $CAPTCHA_TAB_INDEX -->{$CAPTCHA_TAB_INDEX}<!-- ELSE -->10<!-- ENDIF -->"></div>
 			<noscript>
-				<iframe src="{RECAPTCHA_SERVER}/noscript?k={RECAPTCHA_PUBKEY}{RECAPTCHA_ERRORGET}" height="300" width="500" frameborder="0"></iframe><br />
-				<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
-				<input type="hidden" name="recaptcha_response_field" value="manual_challenge" />
+				<div>{L_RECAPTCHA_NOSCRIPT}</div>
 			</noscript>
 		</td>
 	</tr>
