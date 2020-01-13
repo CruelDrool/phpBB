@@ -27,19 +27,16 @@ if (!class_exists('phpbb_default_captcha'))
 */
 class phpbb_recaptcha extends phpbb_default_captcha
 {
-	var $recaptcha_server = 'http://www.google.com/recaptcha';
-	var $recaptcha_server_secure = 'https://www.google.com/recaptcha'; // class constants :(
-
-	// We are opening a socket to port 80 of this host and send
-	// the POST request asking for verification to the path specified here.
-	var $recaptcha_verify_url = 'https://www.google.com/recaptcha/api/siteverify';
+	// Serve everything over https.
+	var $recaptcha_server = 'https://www.google.com/recaptcha';
+	var $recaptcha_verify_url = '';
 	
 	var $response;
 
 	// Constructor
 	function __construct()
 	{
-		$this->recaptcha_server = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? $this->recaptcha_server_secure : $this->recaptcha_server;
+		$this->recaptcha_verify_url = $this->recaptcha_server . '/api/siteverify';
 	}
 
 	function init($type)
@@ -205,9 +202,9 @@ class phpbb_recaptcha extends phpbb_default_captcha
 	}
 
 	/**
-	* Submits an HTTP POST to a reCAPTCHA server
+	* Submits an HTTPS POST to a reCAPTCHA server
 	* @param string $url
-	* @param array $data
+	* @param array $params
 	* @return array response
 	*/
 	function _recaptcha_http_post($url, $params)
@@ -236,7 +233,7 @@ class phpbb_recaptcha extends phpbb_default_captcha
 	}
 
 	/**
-	* Calls an HTTP POST function to verify if the user's guess was correct
+	* Calls an HTTPS POST function to verify if the user's guess was correct
 	* @param array $extra_params an array of extra variables to post to the server
 	* @return ReCaptchaResponse
 	*/
