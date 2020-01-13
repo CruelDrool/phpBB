@@ -28,7 +28,7 @@ if (!class_exists('phpbb_default_captcha'))
 class phpbb_recaptcha extends phpbb_default_captcha
 {
 	// Serve everything over https.
-	var $recaptcha_server = 'https://www.google.com/recaptcha';
+	var $recaptcha_server = 'https://www.google.com/recaptcha/api';
 	var $recaptcha_verify_url = '';
 	
 	var $response;
@@ -36,7 +36,7 @@ class phpbb_recaptcha extends phpbb_default_captcha
 	// Constructor
 	function __construct()
 	{
-		$this->recaptcha_verify_url = $this->recaptcha_server . '/api/siteverify';
+		$this->recaptcha_verify_url = $this->recaptcha_server . '/siteverify';
 	}
 
 	function init($type)
