@@ -1,18 +1,11 @@
 <!-- IF S_RECAPTCHA_AVAILABLE -->
 	<dl>
+	<dt>
+	<label>{L_RECAPTCHA_VERSION_NAME}</label><br/>
+	<span>{L_RECAPTCHA_VERSION_NAME_EXPLAIN}</span>
+	</dt>
 	<dd>
-		<script type="text/javascript" src="{RECAPTCHA_SERVER}.js?hl={L_RECAPTCHA_LANG}" async defer></script>
-		<script type="text/javascript">
-		// <![CDATA[
-		<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
-			document.getElementById('recaptcha_table').style.direction = 'ltr';
-		<!-- ENDIF -->
-		// ]]>
-		</script>
-        <div class="g-recaptcha" data-sitekey="{RECAPTCHA_PUBKEY}"></div>
-		<noscript>
-			<div>{L_RECAPTCHA_NOSCRIPT}</div>
-		</noscript>
+		{RECAPTCHA_HTML}
 	</dd>
 	</dl>
 <!-- ELSE -->

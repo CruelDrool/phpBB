@@ -747,6 +747,8 @@ $lang = array_merge($lang, array(
 	'LOG_WORD_ADD'			=> '<strong>Added word censor</strong><br />» %s',
 	'LOG_WORD_DELETE'		=> '<strong>Deleted word censor</strong><br />» %s',
 	'LOG_WORD_EDIT'			=> '<strong>Edited word censor</strong><br />» %s',
+	
+	'LOG_RECAPTCHA_VERIFY_ERROR' => '<strong>Error while verifying reCAPTCHA response token</strong><br />» %s',
 ));
 
 ?>

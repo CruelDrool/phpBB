@@ -1,25 +1,28 @@
-<!-- IF S_RECAPTCHA_AVAILABLE -->
+
+	<!-- IF RECAPTCHA_VERSION == "v2_checkbox" -->
 	<tr>
 		<th colspan="2" valign="middle">{L_CONFIRM_CODE}</th>
 	</tr>
+		<!-- IF S_TYPE == 1 and RECAPTCHA_VERSION == "v2_checkbox" -->
 	<tr>
+		<td class="row3" colspan="2"><span class="gensmall">{L_CONFIRM_EXPLAIN}</span></td>
+	</tr>
+		<!-- ENDIF -->	
+	<tr>
+		<!-- IF S_RECAPTCHA_AVAILABLE -->
 		<td class="row1"><b class="genmed">{L_CONFIRM_CODE}:</b><br /><span class="gensmall">{L_RECAPTCHA_EXPLAIN}</span></td>
 		<td class="row2">
-		<script type="text/javascript" src="{RECAPTCHA_SERVER}.js?hl={L_RECAPTCHA_LANG}" async defer></script>
-		<script type="text/javascript">
-		// <![CDATA[
-		<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
-			document.getElementById('recaptcha_table').style.direction = 'ltr';
+		<!-- ELSE -->
+		<td class="row1" colspan="2">
 		<!-- ENDIF -->
-		// ]]>
-		</script>
-			<div class="g-recaptcha" data-sitekey="{RECAPTCHA_PUBKEY}" data-tabindex="<!-- IF $CAPTCHA_TAB_INDEX -->{$CAPTCHA_TAB_INDEX}<!-- ELSE -->10<!-- ENDIF -->"></div>
-			<noscript>
-				<div>{L_RECAPTCHA_NOSCRIPT}</div>
-			</noscript>
+	<!-- ENDIF -->
+	<!-- IF S_RECAPTCHA_AVAILABLE -->
+		{RECAPTCHA_HTML}
+	<!-- ELSE -->
+		{L_RECAPTCHA_NOT_AVAILABLE}
+	<!-- ENDIF -->
+	<!-- IF RECAPTCHA_VERSION == "v2_checkbox" -->
 		</td>
 	</tr>
+	<!-- ENDIF -->
 
-<!-- ELSE -->
-{L_RECAPTCHA_NOT_AVAILABLE}
-<!-- ENDIF -->
