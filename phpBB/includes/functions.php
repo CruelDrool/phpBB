@@ -4818,12 +4818,13 @@ function page_footer($run_cron = true)
 		($config['captcha_plugin'] ?? '') == 'phpbb_recaptcha' &&
 		($config['recaptcha_version'] ?? '') == 'v3' &&
 		($config['recaptcha_v3_load_all'] ?? true) &&
-		( !$user->data['is_registered'] || !($config['recaptcha_v3_load_all_guests_only'] ?? true) ) &&
-		!class_exists('phpbb_recaptcha') 
+		( !$user->data['is_registered'] || !($config['recaptcha_v3_load_all_guests_only'] ?? true) )
 		) {
-			include($phpbb_root_path . 'includes/captcha/plugins/phpbb_recaptcha_plugin.' . $phpEx);
-			$recapthca_v3_footer = phpbb_recaptcha::page_footer_output();
+			if (!class_exists('phpbb_recaptcha') ) {
+				include($phpbb_root_path . 'includes/captcha/plugins/phpbb_recaptcha_plugin.' . $phpEx);
+			}
 			
+			$recapthca_v3_footer = phpbb_recaptcha::page_footer_output();	
 	}
 	$template->assign_vars(array(
 		'DEBUG_OUTPUT'			=> (defined('DEBUG')) ? $debug_output : '',

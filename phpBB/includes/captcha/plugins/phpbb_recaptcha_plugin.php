@@ -33,6 +33,9 @@ class phpbb_recaptcha extends phpbb_default_captcha
 	private const NAME_PREFIX_TPL_VAR = self::NAME_UPPER.'_';
 	private const NAME_PREFIX_LANG = self::NAME_PREFIX_TPL_VAR;
 	private const API_URL_FORMAT = 'https://www.%s/recaptcha/api%s';
+	
+	/** @var bool Need this to display the v3 footer even after being verified. */
+	static $captcha_added = false;
 		
 	/** @var array CAPTCHA types mapped to their action */
 	private $actions = [
@@ -224,11 +227,21 @@ HTML;
 		<p>$noscript</p>
 	</noscript>
 HTML;
+
+		self::$captcha_added = true;
+		
 		return $html;
 	}
 	
+	/**
+	 * The v3 footer
+	 *
+	 * @return string HTML with JavaScript.
+	 */
 	static function page_footer_output() {
 		global $config;
+		// If a v3 field has already been added already then return.
+		if (self::$captcha_added) {return '';}
 		
 		if ( ($config[self::NAME_PREFIX_CONFIG.'version'] ?? self::DEFAULTS['version']) != 'v3'  ) {return '';}
 		return self::_get_html_output();
