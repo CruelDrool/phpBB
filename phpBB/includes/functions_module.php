@@ -31,14 +31,14 @@ class p_master
 	var $include_path = false;
 	var $active_module = false;
 	var $active_module_row_id = false;
-	var $acl_forum_id = false;
+	static $acl_forum_id = false;
 	var $module_ary = array();
 
 	/**
 	* Constuctor
 	* Set module include path
 	*/
-	function p_master($include_path = false)
+	function __construct($include_path = false)
 	{
 		global $phpbb_root_path;
 
@@ -311,7 +311,7 @@ class p_master
 	/**
 	* Check module authorisation
 	*/
-	function module_auth($module_auth, $forum_id = false)
+	static function module_auth($module_auth, $forum_id = false)
 	{
 		global $auth, $config;
 
@@ -358,7 +358,7 @@ class p_master
 		// Make sure $id seperation is working fine
 		$module_auth = str_replace(' , ', ',', $module_auth);
 
-		$forum_id = ($forum_id === false) ? $this->acl_forum_id : $forum_id;
+		$forum_id = ($forum_id === false) ? self::$acl_forum_id : $forum_id;
 
 		$is_auth = false;
 		eval('$is_auth = (int) (' . preg_replace(array('#acl_([a-z0-9_]+)(,\$id)?#', '#\$id#', '#aclf_([a-z0-9_]+)#', '#cfg_([a-z0-9_]+)#', '#request_([a-zA-Z0-9_]+)#'), array('(int) $auth->acl_get(\'\\1\'\\2)', '(int) $forum_id', '(int) $auth->acl_getf_global(\'\\1\')', '(int) $config[\'\\1\']', '!empty($_REQUEST[\'\\1\'])'), $module_auth) . ');');

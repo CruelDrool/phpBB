@@ -124,7 +124,7 @@ function phpbb_has_trailing_path($phpEx)
 }
 
 // Check if trailing path is used
-if (phpbb_has_trailing_path($phpEx))
+if (isset($phpEx) && phpbb_has_trailing_path($phpEx))
 {
 	if (substr(strtolower(@php_sapi_name()), 0, 3) === 'cgi')
 	{

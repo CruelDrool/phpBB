@@ -26,7 +26,7 @@ class phpbb_captcha_factory
 	/**
 	* return an instance of class $name in file $name_plugin.php
 	*/
-	function &get_instance($name)
+	static function &get_instance($name)
 	{
 		global $phpbb_root_path, $phpEx;
 
@@ -42,7 +42,7 @@ class phpbb_captcha_factory
 	/**
 	* Call the garbage collector
 	*/
-	function garbage_collect($name)
+	static function garbage_collect($name)
 	{
 		global $phpbb_root_path, $phpEx;
 
@@ -57,7 +57,7 @@ class phpbb_captcha_factory
 	/**
 	* return a list of all discovered CAPTCHA plugins
 	*/
-	function get_captcha_types()
+	static function get_captcha_types()
 	{
 		global $phpbb_root_path, $phpEx;
 

@@ -30,7 +30,7 @@ class captcha
 	/**
 	* Define filtered pngs on init
 	*/
-	function captcha()
+	function __construct()
 	{
 		// If we can we will generate a single filtered png, we avoid nastiness via emulation of some Zlib stuff
 		$this->define_filtered_pngs();
@@ -82,7 +82,7 @@ class captcha
 
 				for ($j = 0; $j < $code_len; $j++)
 				{
-					$image .= $this->randomise(substr($hold_chars[$code{$j}][$i - $offset_y - 1], 1), $char_widths[$j]);
+					$image .= $this->randomise(substr($hold_chars[$code[$j]][$i - $offset_y - 1], 1), $char_widths[$j]);
 				}
 
 				for ($j = $offset_x + $img_width; $j < $this->width; $j++)
@@ -121,7 +121,7 @@ class captcha
 		$end = strlen($scanline) - ceil($width/2);
 		for ($i = (int) floor($width / 2); $i < $end; $i++)
 		{
-			$pixel = ord($scanline{$i});
+			$pixel = ord($scanline[$i]);
 
 			if ($pixel < 190)
 			{
@@ -133,7 +133,7 @@ class captcha
 			}
 			else
 			{
-				$new_line .= $scanline{$i};
+				$new_line .= $scanline[$i];
 			}
 		}
 

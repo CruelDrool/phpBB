@@ -119,7 +119,7 @@ class utf_normalizer
 	* @param	string	&$str	Unchecked UTF string
 	* @return	string			The string, validated and in normal form
 	*/
-	function nfc(&$str)
+	static function nfc(&$str)
 	{
 		$pos = strspn($str, UTF8_ASCII_RANGE);
 		$len = strlen($str);
@@ -151,7 +151,7 @@ class utf_normalizer
 	* @param	string	&$str	Unchecked UTF string
 	* @return	string			The string, validated and in normal form
 	*/
-	function nfkc(&$str)
+	static function nfkc(&$str)
 	{
 		$pos = strspn($str, UTF8_ASCII_RANGE);
 		$len = strlen($str);
@@ -183,7 +183,7 @@ class utf_normalizer
 	* @param	string	&$str	Unchecked UTF string
 	* @return	string			The string, validated and in normal form
 	*/
-	function nfd(&$str)
+	static function nfd(&$str)
 	{
 		$pos = strspn($str, UTF8_ASCII_RANGE);
 		$len = strlen($str);
@@ -209,7 +209,7 @@ class utf_normalizer
 	* @param	string	&$str	Unchecked UTF string
 	* @return	string			The string, validated and in normal form
 	*/
-	function nfkd(&$str)
+	static function nfkd(&$str)
 	{
 		$pos = strspn($str, UTF8_ASCII_RANGE);
 		$len = strlen($str);
@@ -242,7 +242,7 @@ class utf_normalizer
 	*
 	* @access	private
 	*/
-	function recompose($str, $pos, $len, &$qc, &$decomp_map)
+	static function recompose($str, $pos, $len, &$qc, &$decomp_map)
 	{
 		global $utf_combining_class, $utf_canonical_comp, $utf_jamo_type, $utf_jamo_index;
 
@@ -944,7 +944,7 @@ class utf_normalizer
 	*
 	* @access	private
 	*/
-	function decompose($str, $pos, $len, &$decomp_map)
+	static function decompose($str, $pos, $len, &$decomp_map)
 	{
 		global $utf_combining_class;
 

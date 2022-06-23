@@ -97,7 +97,7 @@ class captcha
 		$maxg = mt_rand(150, 230);
 		$maxb = mt_rand(150, 230);
 
-		for ($i = -30; $i <= 30; ++$i)
+		for ($i = -12; $i <= 30; ++$i)
 		{
 			$coeff1 = ($i + 12) / 45;
 			$coeff2 = 1 - $coeff1;

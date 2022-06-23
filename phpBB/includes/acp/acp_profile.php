@@ -54,8 +54,6 @@ class acp_profile
 			FIELD_DROPDOWN	=> array('field_length' => 0, 'field_minlen' => 0, 'field_maxlen' => 5, 'field_validation' => '', 'field_novalue' => 0, 'field_default_value' => 0),
 		);
 
-		$cp = new custom_profile_admin();
-
 		// Build Language array
 		// Based on this, we decide which elements need to be edited later and which language items are missing
 		$this->lang_defs = array();
@@ -94,6 +92,8 @@ class acp_profile
 				$this->lang_defs['diff'][$field_id] = array_diff(array_values($this->lang_defs['iso']), $field_ary);
 			}
 		}
+
+		$cp = new custom_profile_admin($this->lang_defs);
 
 		switch ($action)
 		{

@@ -30,7 +30,7 @@ if (!class_exists('phpbb_default_captcha'))
 class phpbb_captcha_nogd extends phpbb_default_captcha
 {
 
-	function phpbb_captcha_nogd()
+	function __construct()
 	{
 		global $phpbb_root_path, $phpEx;
 
@@ -40,12 +40,12 @@ class phpbb_captcha_nogd extends phpbb_default_captcha
 		}
 	}
 
-	function is_available()
+	static function is_available()
 	{
 		return true;
 	}
 
-	function get_name()
+	static function get_name()
 	{
 		return 'CAPTCHA_NO_GD';
 	}

@@ -68,7 +68,7 @@ class convert
 
 	var $p_master;
 
-	function convert(&$p_master)
+	function __construct(&$p_master)
 	{
 		$this->p_master = &$p_master;
 	}
@@ -83,7 +83,7 @@ class install_convert extends module
 	/**
 	* Variables used while converting, they are accessible from the global variable $convert
 	*/
-	function install_convert(&$p_master)
+	function __construct(&$p_master)
 	{
 		$this->p_master = &$p_master;
 	}

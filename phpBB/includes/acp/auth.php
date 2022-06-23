@@ -182,7 +182,7 @@ class auth_admin extends auth
 		}
 
 		// Defining the user-function here to save some memory
-		$return_acl_fill = create_function('$value', 'return ' . $acl_fill . ';');
+		$return_acl_fill = function () use ($acl_fill) { return $acl_fill; };
 
 		// Actually fill the gaps
 		if (sizeof($hold_ary))
@@ -787,7 +787,7 @@ class auth_admin extends auth
 
 		// Because we just changed the options and also purged the options cache, we instantly update/regenerate it for later calls to succeed.
 		$this->acl_options = array();
-		$this->auth_admin();
+		$this->__construct();
 
 		return true;
 	}
@@ -1175,7 +1175,7 @@ class auth_admin extends auth
 	* Building content array from permission rows with explicit key ordering
 	* used by display_mask()
 	*/
-	function build_permission_array(&$permission_row, &$content_array, &$categories, $key_sort_array)
+	static function build_permission_array(&$permission_row, &$content_array, &$categories, $key_sort_array)
 	{
 		global $user;
 

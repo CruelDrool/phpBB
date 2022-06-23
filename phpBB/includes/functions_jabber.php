@@ -49,7 +49,7 @@ class jabber
 
 	/**
 	*/
-	function jabber($server, $port, $username, $password, $use_ssl = false)
+	function __construct($server, $port, $username, $password, $use_ssl = false)
 	{
 		$this->connect_server		= ($server) ? $server : 'localhost';
 		$this->port					= ($port) ? $port : 5222;
@@ -84,7 +84,7 @@ class jabber
 	/**
 	* Able to use the SSL functionality?
 	*/
-	function can_use_ssl()
+	static function can_use_ssl()
 	{
 		// Will not work with PHP >= 5.2.1 or < 5.2.3RC2 until timeout problem with ssl hasn't been fixed (http://bugs.php.net/41236)
 		return ((version_compare(PHP_VERSION, '5.2.1', '<') || version_compare(PHP_VERSION, '5.2.3RC2', '>=')) && @extension_loaded('openssl')) ? true : false;

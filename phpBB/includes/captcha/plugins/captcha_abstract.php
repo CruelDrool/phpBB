@@ -66,7 +66,10 @@ class phpbb_default_captcha
 		$this->seed -= 0x7fffffff * floor($this->seed / 0x7fffffff);
 
 		$captcha = new captcha();
-		define('IMAGE_OUTPUT', 1);
+
+		if (!defined('IMAGE_OUTPUT'))
+			define('IMAGE_OUTPUT', 1);
+
 		$captcha->execute($this->code, $this->seed);
 	}
 
@@ -81,7 +84,10 @@ class phpbb_default_captcha
 			}
 		}
 		$captcha = new captcha();
-		define('IMAGE_OUTPUT', 1);
+
+		if (!defined('IMAGE_OUTPUT'))
+			define('IMAGE_OUTPUT', 1);
+
 		$captcha->execute($this->code, $this->seed);
 	}
 
@@ -334,7 +340,7 @@ class phpbb_default_captcha
 		global $db, $user;
 
 		$sql = 'DELETE FROM ' . CONFIRM_TABLE . "
-			WHERE confirm_id = '" . $db->sql_escape($confirm_id) . "'
+			WHERE confirm_id = '" . $db->sql_escape($this->confirm_id) . "'
 				AND session_id = '" . $db->sql_escape($user->session_id) . "'
 				AND confirm_type = " . $this->type;
 		$db->sql_query($sql);
@@ -373,6 +379,11 @@ class phpbb_default_captcha
 	function has_config()
 	{
 		return false;
+	}
+
+	function get_class_name()
+	{
+
 	}
 
 }

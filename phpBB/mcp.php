@@ -142,7 +142,7 @@ if ($forum_id && !$auth->acl_get('f_read', $forum_id))
 
 if ($forum_id)
 {
-	$module->acl_forum_id = $forum_id;
+	$module::$acl_forum_id = $forum_id;
 }
 
 // Instantiate module system and generate list of available modules

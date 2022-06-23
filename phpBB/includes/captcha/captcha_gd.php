@@ -97,7 +97,18 @@ class captcha
 			for ($x = 0; $x < $this->width; $x += mt_rand($grid - 2, $grid + 2))
 			{
 				$current_colour = $scheme[array_rand($scheme)];
-				imagedashedline($img, mt_rand($x -3, $x + 3), mt_rand(0, 4), mt_rand($x -3, $x + 3), mt_rand($this->height - 5, $this->height), $current_colour);
+				$style = [
+					$current_colour,
+					$current_colour,
+					$current_colour,
+					$current_colour,
+					IMG_COLOR_TRANSPARENT,
+					IMG_COLOR_TRANSPARENT,
+					IMG_COLOR_TRANSPARENT,
+					IMG_COLOR_TRANSPARENT
+				];
+				imagesetstyle($img, $style);
+				imageline($img, mt_rand($x -3, $x + 3), mt_rand(0, 4), mt_rand($x -3, $x + 3), mt_rand($this->height - 5, $this->height), IMG_COLOR_STYLED);
 			}
 		}
 		if ($config['captcha_gd_wave'] && ($config['captcha_gd_y_grid'] || $config['captcha_gd_y_grid']))
@@ -1873,7 +1884,7 @@ class char_cube3d
 
 	/**
 	*/
-	function char_cube3d(&$bitmaps, $letter)
+	function __construct(&$bitmaps, $letter)
 	{
 		$this->bitmap			= $bitmaps['data'][$letter];
 		$this->bitmap_width		= $bitmaps['width'];
@@ -2133,7 +2144,7 @@ class colour_manager
 	/**
 	* Create the colour manager, link it to the image resource
 	*/
-	function colour_manager($img, $background = false, $mode = 'ahsv')
+	function __construct($img, $background = false, $mode = 'ahsv')
 	{
 		$this->img = $img;
 		$this->mode = $mode;

@@ -18,6 +18,34 @@ if (!defined('IN_PHPBB'))
 
 // Common global functions
 
+
+if (!function_exists('each')) {
+	/**
+	 * each() compatibility function.
+	 *
+	 * @param array $array 
+	 *
+	 * @return array
+	 */
+	function each(array &$array)
+    {
+        if (current($array) === false) {
+            return false;
+        }
+    
+        $key = key($array);
+        $value = current($array);
+        next($array);
+    
+        return [
+            1 => $value,
+            'value' => $value,
+            0 => $key,
+            'key' => $key,
+        ];
+    }
+}
+
 /**
 * set_var
 *
@@ -847,7 +875,7 @@ function phpbb_chmod($filename, $perms = CHMOD_READ)
 			}
 
 		default:
-			return false;
+			$result = false;
 		break;
 	}
 
@@ -882,7 +910,7 @@ function phpbb_is_writable($file)
 					unlink($result);
 
 					// Ensure the file is actually in the directory (returned realpathed)
-					return (strpos($result, $file) === 0) ? true : false;
+					return (strpos(mb_strtolower($result), mb_strtolower($file)) === 0) ? true : false;
 				}
 			}
 			else
@@ -953,8 +981,8 @@ if (!function_exists('str_split'))
 {
 	/**
 	* A wrapper for the PHP5 function str_split()
-	* @param array $string contains the string to be converted
-	* @param array $split_length contains the length of each chunk
+	* @param string $string contains the string to be converted
+	* @param int $split_length contains the length of each chunk
 	*
 	* @return  Converts a string to an array. If the optional split_length parameter is specified,
 	*  	the returned array will be broken down into chunks with each being split_length in length,
@@ -1337,6 +1365,7 @@ function tz_select($default = '', $truncate = false)
 * Marks a topic as posted to
 *
 * @param int $user_id can only be used with $mode == 'post'
+* @param bool|array $forum_id
 */
 function markread($mode, $forum_id = false, $topic_id = false, $post_time = 0, $user_id = 0)
 {
@@ -1596,6 +1625,7 @@ function markread($mode, $forum_id = false, $topic_id = false, $post_time = 0, $
 
 /**
 * Get topic tracking info by using already fetched info
+* @param bool|array $global_announce_list
 */
 function get_topic_tracking($forum_id, $topic_ids, &$rowset, $forum_mark_time, $global_announce_list = false)
 {
@@ -1676,6 +1706,7 @@ function get_topic_tracking($forum_id, $topic_ids, &$rowset, $forum_mark_time, $
 
 /**
 * Get topic tracking info from db (for cookie based tracking only this function is used)
+* @param bool|array $global_announce_list
 */
 function get_complete_topic_tracking($forum_id, $topic_ids, $global_announce_list = false)
 {
@@ -3375,7 +3406,7 @@ function parse_cfg_file($filename, $lines = false)
 		// Determine first occurrence, since in values the equal sign is allowed
 		$key = htmlspecialchars(strtolower(trim(substr($line, 0, $delim_pos))));
 		$value = trim(substr($line, $delim_pos + 1));
-
+		$length = strlen($value);
 		if (in_array($value, array('off', 'false', '0')))
 		{
 			$value = false;
@@ -3388,9 +3419,9 @@ function parse_cfg_file($filename, $lines = false)
 		{
 			$value = '';
 		}
-		else if (($value[0] == "'" && $value[sizeof($value) - 1] == "'") || ($value[0] == '"' && $value[sizeof($value) - 1] == '"'))
+		else if ((substr($value, 0, 1) == "'" && substr($value, $length-1, 1) == "'") || (substr($value, 0, 1) == '"' && substr($value, $length-1, 1) == '"'))
 		{
-			$value = htmlspecialchars(substr($value, 1, sizeof($value)-2));
+			$value = htmlspecialchars(substr($value, 1, $length-2));
 		}
 		else
 		{
@@ -3861,7 +3892,7 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 	global $phpEx, $phpbb_root_path, $msg_title, $msg_long_text;
 
 	// Do not display notices if we suppress them via @
-	if (error_reporting() == 0 && $errno != E_USER_ERROR && $errno != E_USER_WARNING && $errno != E_USER_NOTICE)
+	if ( ( ( version_compare(PHP_VERSION, '8.0', '>=') && !(error_reporting() & $errno) )  || error_reporting() == 0 ) && $errno != E_USER_ERROR && $errno != E_USER_WARNING && $errno != E_USER_NOTICE)
 	{
 		return;
 	}

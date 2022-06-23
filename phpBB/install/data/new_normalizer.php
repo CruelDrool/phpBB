@@ -108,7 +108,7 @@ class utf_new_normalizer
 	* @param	string	&$str	Unchecked UTF string
 	* @return	string			The string, validated and in normal form
 	*/
-	function nfc(&$str)
+	static function nfc(&$str)
 	{
 		$pos = strspn($str, UTF8_ASCII_RANGE);
 		$len = strlen($str);
@@ -140,7 +140,7 @@ class utf_new_normalizer
 	* @param	string	&$str	Unchecked UTF string
 	* @return	string			The string, validated and in normal form
 	*/
-	function nfkc(&$str)
+	static function nfkc(&$str)
 	{
 		$pos = strspn($str, UTF8_ASCII_RANGE);
 		$len = strlen($str);
@@ -178,7 +178,7 @@ class utf_new_normalizer
 	*
 	* @access	private
 	*/
-	function recompose($str, $pos, $len, &$qc, &$decomp_map)
+	static function recompose($str, $pos, $len, &$qc, &$decomp_map)
 	{
 		global $utf_canonical_comp;
 

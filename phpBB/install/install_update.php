@@ -64,7 +64,7 @@ class install_update extends module
 	// Set to false
 	var $test_update = false;
 
-	function install_update(&$p_master)
+	function __construct(&$p_master)
 	{
 		$this->p_master = &$p_master;
 	}

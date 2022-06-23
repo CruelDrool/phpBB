@@ -46,7 +46,7 @@ if (!empty($setmodules))
 */
 class install_install extends module
 {
-	function install_install(&$p_master)
+	function __construct(&$p_master)
 	{
 		$this->p_master = &$p_master;
 	}
@@ -271,7 +271,7 @@ class install_install extends module
 			));
 
 			$checks = array(
-				array('func_overload', '&', MB_OVERLOAD_MAIL|MB_OVERLOAD_STRING),
+				// array('func_overload', '&', MB_OVERLOAD_MAIL|MB_OVERLOAD_STRING),
 				array('encoding_translation', '!=', 0),
 				array('http_input', '!=', array('pass', '')),
 				array('http_output', '!=', array('pass', ''))
@@ -597,7 +597,8 @@ class install_install extends module
 			$available_dbms_temp = array();
 			foreach ($available_dbms as $type => $dbms_ary)
 			{
-				if (!$dbms_ary['AVAILABLE'])
+				$available = $dbms_ary['AVAILABLE'] ?? false;
+				if (!$available)
 				{
 					continue;
 				}

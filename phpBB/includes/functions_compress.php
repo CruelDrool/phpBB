@@ -142,10 +142,14 @@ class compress
 
 		return $methods;
 	}
+
+	function data($name, $data, $is_dir = false, $stat) {
+
+	}
 }
 
 /**
-* Zip creation class from phpMyAdmin 2.3.0 (c) Tobias Ratschiller, Olivier Müller, Loïc Chapeaux,
+* Zip creation class from phpMyAdmin 2.3.0 (c) Tobias Ratschiller, Olivier MÃ¼ller, LoÃ¯c Chapeaux,
 * Marc Delisle, http://www.phpmyadmin.net/
 *
 * Zip extraction function by Alexandre Tedeschi, alexandrebr at gmail dot com
@@ -169,7 +173,7 @@ class compress_zip extends compress
 	/**
 	* Constructor
 	*/
-	function compress_zip($mode, $file)
+	function __construct($mode, $file)
 	{
 		$this->fp = @fopen($file, $mode . 'b');
 
@@ -254,7 +258,7 @@ class compress_zip extends compress
 							}
 						}
 						// This is a directory, we are not writting files
-						continue;
+						continue 2;
 					}
 					else
 					{
@@ -505,7 +509,7 @@ class compress_tar extends compress
 	/**
 	* Constructor
 	*/
-	function compress_tar($mode, $file, $type = '')
+	function __construct($mode, $file, $type = '')
 	{
 		$type = (!$type) ? $file : $type;
 		$this->isgz = preg_match('#(\.tar\.gz|\.tgz)$#', $type);

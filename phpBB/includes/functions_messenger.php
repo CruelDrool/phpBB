@@ -22,8 +22,9 @@ if (!defined('IN_PHPBB'))
 */
 class messenger
 {
-	var $vars, $msg, $extra_headers, $replyto, $from, $subject;
+	var $vars, $msg, $replyto, $from, $subject;
 	var $addresses = array();
+	var $extra_headers = [];
 
 	var $mail_priority = MAIL_NORMAL_PRIORITY;
 	var $use_queue = true;
@@ -43,8 +44,8 @@ class messenger
 		$this->subject = '';
 
 		// Determine EOL character (\n for UNIX, \r\n for Windows and \r for Mac)
-		$this->eol = (!defined('PHP_EOL')) ? (($eol = strtolower(substr(PHP_OS, 0, 3))) == 'win') ? "\r\n" : (($eol == 'mac') ? "\r" : "\n") : PHP_EOL;
-		$this->eol = (!$this->eol) ? "\n" : $this->eol;
+		$this->eol = !defined('PHP_EOL') ? ( ( $eol = strtolower(substr(PHP_OS, 0, 3)) ) == 'win' ? "\r\n" :  ( $eol == 'mac' ? "\r" : "\n" ) ) : PHP_EOL;
+		$this->eol = !$this->eol ? "\n" : $this->eol;
 	}
 
 	/**
@@ -347,7 +348,7 @@ class messenger
 	/**
 	* Add error message to log
 	*/
-	function error($type, $msg)
+	static function error($type, $msg)
 	{
 		global $user, $phpEx, $phpbb_root_path, $config;
 
@@ -647,8 +648,8 @@ class queue
 		$this->cache_file = "{$phpbb_root_path}cache/queue.$phpEx";
 
 		// Determine EOL character (\n for UNIX, \r\n for Windows and \r for Mac)
-		$this->eol = (!defined('PHP_EOL')) ? (($eol = strtolower(substr(PHP_OS, 0, 3))) == 'win') ? "\r\n" : (($eol == 'mac') ? "\r" : "\n") : PHP_EOL;
-		$this->eol = (!$this->eol) ? "\n" : $this->eol;
+		$this->eol = !defined('PHP_EOL') ? ( ( $eol = strtolower(substr(PHP_OS, 0, 3)) ) == 'win' ? "\r\n" :  ( $eol == 'mac' ? "\r" : "\n" ) ) : PHP_EOL;
+		$this->eol = !$this->eol ? "\n" : $this->eol;
 	}
 
 	/**

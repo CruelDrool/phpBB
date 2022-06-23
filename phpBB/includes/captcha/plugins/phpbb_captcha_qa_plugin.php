@@ -100,7 +100,7 @@ class phpbb_captcha_qa
 	*  API function
 	* See if the captcha has created its tables.
 	*/
-	function is_installed()
+	static function is_installed()
 	{
 		global $db, $phpbb_root_path, $phpEx;
 
@@ -116,7 +116,7 @@ class phpbb_captcha_qa
 	/**
 	*  API function - for the captcha to be available, it must have installed itself and there has to be at least one question in the board's default lang
 	*/
-	function is_available()
+	static function is_available()
 	{
 		global $config, $db, $phpbb_root_path, $phpEx, $user;
 
@@ -149,7 +149,7 @@ class phpbb_captcha_qa
 	/**
 	*  API function
 	*/
-	function get_name()
+	static function get_name()
 	{
 		return 'CAPTCHA_QA';
 	}
@@ -565,7 +565,7 @@ class phpbb_captcha_qa
 		global $db, $user;
 
 		$sql = 'DELETE FROM ' . CAPTCHA_QA_CONFIRM_TABLE . "
-			WHERE confirm_id = '" . $db->sql_escape($confirm_id) . "'
+			WHERE confirm_id = '" . $db->sql_escape($this->confirm_id) . "'
 				AND session_id = '" . $db->sql_escape($user->session_id) . "'
 				AND confirm_type = " . $this->type;
 		$db->sql_query($sql);

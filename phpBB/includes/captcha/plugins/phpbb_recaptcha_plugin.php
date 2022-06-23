@@ -79,7 +79,7 @@ class phpbb_recaptcha extends phpbb_default_captcha
 			
 		$url = sprintf('%s?%s',
 			sprintf(self::API_URL_FORMAT, ($config[self::NAME_PREFIX_CONFIG.'domain'] ?? self::DEFAULTS['domain']), '.js'),
-			$queries,
+			$queries
 			);
 		return $url; 
 	}
@@ -256,7 +256,7 @@ HTML;
 		parent::init($type);
 	}
 
-	function is_available()
+	static function is_available()
 	{
 		global $config, $user;
 		
@@ -273,7 +273,7 @@ HTML;
 		return true;
 	}
 
-	function get_name()
+	static function get_name()
 	{
 		return 'CAPTCHA_'.self::NAME_UPPER;
 	}
@@ -450,7 +450,7 @@ HTML;
 	* Submits an HTTPS POST with cURL to a reCAPTCHA server
 	* @param string $url
 	* @param array $params
-	* @return array response
+	* @return string response
 	*/
 	function _recaptcha_http_post($url, $params)
 	{

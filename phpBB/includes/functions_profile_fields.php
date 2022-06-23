@@ -151,7 +151,7 @@ class custom_profile
 				$field_value = (int) $field_value;
 
 				// retrieve option lang data if necessary
-				if (!isset($this->options_lang[$field_data['field_id']]) || !isset($this->options_lang[$field_data['field_id']][$field_data['lang_id']]) || !sizeof($this->options_lang[$file_data['field_id']][$field_data['lang_id']]))
+				if (!isset($this->options_lang[$field_data['field_id']]) || !isset($this->options_lang[$field_data['field_id']][$field_data['lang_id']]) || !sizeof($this->options_lang[$field_data['field_id']][$field_data['lang_id']]))
 				{
 					$this->get_option_lang($field_data['field_id'], $field_data['lang_id'], FIELD_DROPDOWN, false);
 				}
@@ -421,7 +421,7 @@ class custom_profile
 	* This is directly connected to the user -> mode == grab is to grab the user specific fields, mode == show is for assigning the row to the template
 	* @access public
 	*/
-	function generate_profile_fields_template($mode, $user_id = 0, $profile_row = false)
+	function generate_profile_fields_template($mode, $user_id = 0, $profile_row = [])
 	{
 		global $db;
 
@@ -889,7 +889,7 @@ class custom_profile
 	/**
 	* Build Array for user insertion into custom profile fields table
 	*/
-	function build_insert_sql_array($cp_data)
+	static function build_insert_sql_array($cp_data)
 	{
 		global $db, $user, $auth;
 
@@ -1007,7 +1007,25 @@ class custom_profile
 */
 class custom_profile_admin extends custom_profile
 {
-	var $vars = array();
+	/**
+	 * @var array
+	 */
+	public $vars = [];
+
+	/**
+	 * @var array
+	 */
+	private $lang_defs = [];
+
+	/**
+	 * Constructor
+	 *
+	 * @param array $lang_defs 
+	 */
+	function __construct($lang_defs)
+	{
+		$this->lang_defs = $lang_defs;
+	}
 
 	/**
 	* Return possible validation options
@@ -1084,9 +1102,9 @@ class custom_profile_admin extends custom_profile
 	*/
 	function get_bool_options()
 	{
-		global $user, $config, $lang_defs;
+		global $user, $config;
 
-		$default_lang_id = $lang_defs['iso'][$config['default_lang']];
+		$default_lang_id = $this->lang_defs['iso'][$config['default_lang']];
 
 		$profile_row = array(
 			'var_name'				=> 'field_default_value',
@@ -1114,9 +1132,9 @@ class custom_profile_admin extends custom_profile
 	*/
 	function get_dropdown_options()
 	{
-		global $user, $config, $lang_defs;
+		global $user, $config;
 
-		$default_lang_id = $lang_defs['iso'][$config['default_lang']];
+		$default_lang_id = $this->lang_defs['iso'][$config['default_lang']];
 
 		$profile_row[0] = array(
 			'var_name'				=> 'field_default_value',
@@ -1148,9 +1166,9 @@ class custom_profile_admin extends custom_profile
 	*/
 	function get_date_options()
 	{
-		global $user, $config, $lang_defs;
+		global $user, $config;
 
-		$default_lang_id = $lang_defs['iso'][$config['default_lang']];
+		$default_lang_id = $this->lang_defs['iso'][$config['default_lang']];
 
 		$profile_row = array(
 			'var_name'				=> 'field_default_value',
