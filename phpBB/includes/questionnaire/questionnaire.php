@@ -28,7 +28,7 @@ if (!defined('IN_PHPBB'))
 */
 class phpbb_questionnaire_data_collector
 {
-	var $providers;
+	var $providers = array();
 	var $data = null;
 	var $install_id = '';
 
@@ -40,7 +40,6 @@ class phpbb_questionnaire_data_collector
 	function __construct($install_id)
 	{
 		$this->install_id = $install_id;
-		$this->providers = array();
 	}
 
 	function add_data_provider(&$provider)

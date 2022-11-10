@@ -1169,15 +1169,8 @@ class smtp_class
 	var $commands = array();
 	var $numeric_response_code = 0;
 
-	var $backtrace = false;
+	var $backtrace = true;
 	var $backtrace_log = array();
-
-	function __construct()
-	{
-		// Always create a backtrace for admins to identify SMTP problems
-		$this->backtrace = true;
-		$this->backtrace_log = array();
-	}
 
 	/**
 	* Add backtrace message for debugging

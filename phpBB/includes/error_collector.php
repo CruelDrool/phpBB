@@ -18,12 +18,7 @@ if (!defined('IN_PHPBB'))
 
 class phpbb_error_collector
 {
-	var $errors;
-
-	function __construct()
-	{
-		$this->errors = array();
-	}
+	var $errors = array();
 
 	function install()
 	{

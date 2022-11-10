@@ -2138,8 +2138,8 @@ class colour_manager
 {
 	var $img;
 	var $mode;
-	var $colours;
-	var $named_colours;
+	var $colours = array();
+	var $named_colours = array();
 
 	/**
 	* Create the colour manager, link it to the image resource
@@ -2148,8 +2148,6 @@ class colour_manager
 	{
 		$this->img = $img;
 		$this->mode = $mode;
-		$this->colours = array();
-		$this->named_colours = array();
 
 		if ($background !== false)
 		{

@@ -27,7 +27,11 @@ class dbal
 	var $return_on_error = false;
 	var $transaction = false;
 	var $sql_time = 0;
-	var $num_queries = array();
+	var $num_queries = array(
+			'cached'		=> 0,
+			'normal'		=> 0,
+			'total'			=> 0,
+		);
 	var $open_queries = array();
 
 	var $curtime = 0;
@@ -75,12 +79,6 @@ class dbal
 	*/
 	function __construct()
 	{
-		$this->num_queries = array(
-			'cached'		=> 0,
-			'normal'		=> 0,
-			'total'			=> 0,
-		);
-
 		// Fill default sql layer based on the class being called.
 		// This can be changed by the specified layer itself later if needed.
 		$this->sql_layer = substr(get_class($this), 5);
