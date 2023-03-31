@@ -760,21 +760,11 @@ class fulltext_native extends search_backend
 		// if we use mysql and the total result count is not cached yet, retrieve it from the db
 		if (!$total_results && $is_mysql)
 		{
-			// Count rows for the executed queries. Replace $select within $sql with SQL_CALC_FOUND_ROWS, and run it.
-			$sql_array_copy = $sql_array;
-			$sql_array_copy['SELECT'] = 'SQL_CALC_FOUND_ROWS p.post_id ';
-
-			$sql = $db->sql_build_query('SELECT', $sql_array_copy);
-			unset($sql_array_copy);
-
-			$db->sql_query($sql);
-			$db->sql_freeresult($result);
-
-			$sql = 'SELECT FOUND_ROWS() as total_results';
+			// Count rows for the executed queries.
+			$sql = 'SELECT COUNT(*) AS total_results FROM (' . $sql . ') AS temp';
 			$result = $db->sql_query($sql);
 			$total_results = (int) $db->sql_fetchfield('total_results');
 			$db->sql_freeresult($result);
-
 			if (!$total_results)
 			{
 				return false;
@@ -997,7 +987,7 @@ class fulltext_native extends search_backend
 		if (!$total_results && $is_mysql)
 		{
 			// Get the number of results as calculated by MySQL
-			$sql = 'SELECT FOUND_ROWS() as total_results';
+			$sql = 'SELECT COUNT(*) AS total_results FROM (' . $sql . ') AS temp';
 			$result = $db->sql_query($sql);
 			$total_results = (int) $db->sql_fetchfield('total_results');
 			$db->sql_freeresult($result);
