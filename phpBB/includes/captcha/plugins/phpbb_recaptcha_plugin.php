@@ -428,7 +428,7 @@ HTML;
 
 	function uninstall()
 	{
-		$this->garbage_collect(0);
+		self::garbage_collect(0);
 	}
 
 	function install()

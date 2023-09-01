@@ -155,7 +155,7 @@ class phpbb_default_captcha
 		return $hidden_fields;
 	}
 
-	function garbage_collect($type)
+	static function garbage_collect($type)
 	{
 		global $db, $config;
 
@@ -187,7 +187,7 @@ class phpbb_default_captcha
 
 	function uninstall()
 	{
-		$this->garbage_collect(0);
+		self::garbage_collect(0);
 	}
 
 	function install()

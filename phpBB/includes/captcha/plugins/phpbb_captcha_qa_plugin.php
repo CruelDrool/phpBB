@@ -38,6 +38,7 @@ class phpbb_captcha_qa
 	var $question_strict;
 	var $attempts = 0;
 	var $type;
+	var $question;
 	// dirty trick: 0 is false, but can still encode that the captcha is not yet validated
 	var $solved = 0;
 
@@ -244,7 +245,7 @@ class phpbb_captcha_qa
 	/**
 	*  API function
 	*/
-	function garbage_collect($type = 0)
+	static function garbage_collect($type = 0)
 	{
 		global $db, $config;
 
@@ -281,7 +282,7 @@ class phpbb_captcha_qa
 	*/
 	function uninstall()
 	{
-		$this->garbage_collect(0);
+		self::garbage_collect(0);
 	}
 
 	/**
