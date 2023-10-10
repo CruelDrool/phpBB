@@ -13,23 +13,35 @@
 <dl>
 	<dt><label for="recaptcha_version">{L_RECAPTCHA_VERSION}:</label><br /><span>{L_RECAPTCHA_VERSION_EXPLAIN}</span></dt>
 	<dd>
-		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v2_checkbox_size').hidden=false;document.getElementById('v3_thresholds').hidden=true;document.getElementById('recaptcha_placement').hidden=true;document.getElementById('v3_thresholds').hidden=true;document.getElementById('recaptcha_v3_load_all').hidden=true;" value="v2_checkbox"<!-- IF RECAPTCHA_VERSION == "v2_checkbox" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_CHECKBOX}</label>
-		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v2_checkbox_size').hidden=true;document.getElementById('v3_thresholds').hidden=true;document.getElementById('recaptcha_placement').hidden=false;document.getElementById('v3_thresholds').hidden=true;document.getElementById('recaptcha_v3_load_all').hidden=true;" value="v2_invisible"<!-- IF RECAPTCHA_VERSION == "v2_invisible" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_INVISIBLE}</label>
-		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v2_checkbox_size').hidden=true;document.getElementById('v3_thresholds').hidden=false;document.getElementById('recaptcha_placement').hidden=false;document.getElementById('v3_thresholds').hidden=false;document.getElementById('recaptcha_v3_load_all').hidden=false;" value="v3"<!-- IF RECAPTCHA_VERSION == "v3" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V3}</label>
+		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v2_checkbox_error_message').hidden=false;document.getElementById('recaptcha_v2_invisible_error_message').hidden=true;document.getElementById('recaptcha_v3_error_message').hidden=true;document.getElementById('recaptcha_v2_checkbox_size').hidden=false;document.getElementById('v3_thresholds').hidden=true;document.getElementById('v3_actions').hidden=true;document.getElementById('recaptcha_placement').hidden=true;document.getElementById('recaptcha_v3_load_all').hidden=true;" value="v2_checkbox"<!-- IF RECAPTCHA_VERSION == "v2_checkbox" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_CHECKBOX}</label>
+		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v2_checkbox_error_message').hidden=true;document.getElementById('recaptcha_v2_invisible_error_message').hidden=false;document.getElementById('recaptcha_v3_error_message').hidden=true;document.getElementById('recaptcha_v2_checkbox_size').hidden=true;document.getElementById('v3_thresholds').hidden=true;document.getElementById('v3_actions').hidden=true;document.getElementById('recaptcha_placement').hidden=false;document.getElementById('recaptcha_v3_load_all').hidden=true;" value="v2_invisible"<!-- IF RECAPTCHA_VERSION == "v2_invisible" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_INVISIBLE}</label>
+		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v2_checkbox_error_message').hidden=true;document.getElementById('recaptcha_v2_invisible_error_message').hidden=true;document.getElementById('recaptcha_v3_error_message').hidden=false;document.getElementById('recaptcha_v2_checkbox_size').hidden=true;document.getElementById('v3_thresholds').hidden=false;document.getElementById('v3_actions').hidden=false;document.getElementById('recaptcha_placement').hidden=false;document.getElementById('recaptcha_v3_load_all').hidden=false;" value="v3"<!-- IF RECAPTCHA_VERSION == "v3" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V3}</label>
 	</dd>
 </dl>
 <dl>
-	<dt><label for="recaptcha_pubkey>{L_RECAPTCHA_PUBLIC}:</label><br /><span>{L_RECAPTCHA_PUBLIC_EXPLAIN}</span></dt>
+	<dt><label for="recaptcha_pubkey">{L_RECAPTCHA_PUBLIC}:</label><br /><span>{L_RECAPTCHA_PUBLIC_EXPLAIN}</span></dt>
 	<dd><input id="recaptcha_pubkey" name="recaptcha_pubkey" value="{RECAPTCHA_PUBKEY}" size="50" type="text" autocomplete="off" /></dd>
 </dl>
 <dl>
 	<dt><label for="recaptcha_privkey">{L_RECAPTCHA_PRIVATE}:</label><br /><span>{L_RECAPTCHA_PRIVATE_EXPLAIN}</span></dt>
 	<dd><input id="recaptcha_privkey" name="recaptcha_privkey" value="{RECAPTCHA_PRIVKEY}" size="50" type="text" autocomplete="off" /></dd>
 </dl>
-<dl>
-	<dt><label for="recaptcha_language">{L_RECAPTCHA_LANGUAGE}:</label><br /><span>{L_RECAPTCHA_LANGUAGE_EXPLAIN}</span></dt>
-	<dd><input id="recaptcha_language" name="recaptcha_language" value="{RECAPTCHA_LANGUAGE}" size="5" type="text" /></dd>
+
+<dl id="recaptcha_v2_checkbox_error_message" <!-- IF RECAPTCHA_VERSION != "v2_checkbox" --> hidden<!-- ENDIF -->>
+	<dt><label for="recaptcha_v2_checkbox_error_message_text">{L_RECAPTCHA_ERROR_MESSAGE}</label><br/><span>{L_RECAPTCHA_ERROR_MESSAGE_EXPLAIN}</span></dt>
+	<dd><textarea rows="5" cols="45" name="recaptcha_v2_checkbox_error_message" id="recaptcha_v2_checkbox_error_message_text" placeholder="{L_RECAPTCHA_V2_CHECKBOX_INCORRECT}">{RECAPTCHA_V2_CHECKBOX_ERROR_MESSAGE}</textarea></dd>
 </dl>
+
+<dl id="recaptcha_v2_invisible_error_message" <!-- IF RECAPTCHA_VERSION != "v2_invisible" --> hidden<!-- ENDIF -->>
+	<dt><label for="recaptcha_v2_invisible_error_message_text">{L_RECAPTCHA_ERROR_MESSAGE}</label><br/><span>{L_RECAPTCHA_ERROR_MESSAGE_EXPLAIN}</span></dt>
+	<dd><textarea rows="5" cols="45" name="recaptcha_v2_invisible_error_message" id="recaptcha_v2_invisible_error_message_text" placeholder="{L_RECAPTCHA_V2_INVISIBLE_INCORRECT}">{RECAPTCHA_V2_INVISIBLE_ERROR_MESSAGE}</textarea></dd>
+</dl>
+
+<dl id="recaptcha_v3_error_message" <!-- IF RECAPTCHA_VERSION != "v3" --> hidden<!-- ENDIF -->>
+	<dt><label for="recaptcha_v3_error_message_text">{L_RECAPTCHA_ERROR_MESSAGE}</label><br/><span>{L_RECAPTCHA_ERROR_MESSAGE_EXPLAIN}</span></dt>
+	<dd><textarea rows="5" cols="45" name="recaptcha_v3_error_message" id="recaptcha_v3_error_message_text" placeholder="{L_RECAPTCHA_V3_INCORRECT}">{RECAPTCHA_V3_ERROR_MESSAGE}</textarea></dd>
+</dl>
+
 <dl>
 	<dt>
 		<label>{L_RECAPTCHA_DOMAIN}</label>
@@ -51,6 +63,19 @@
 		<label><input name="recaptcha_verify_origin" class="radio" type="radio" value="1"<!-- IF RECAPTCHA_VERIFY_ORIGIN -->checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 		<label><input name="recaptcha_verify_origin" class="radio" type="radio" value="0"<!-- IF not RECAPTCHA_VERIFY_ORIGIN -->checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 	</dd>
+</dl>
+
+<dl>
+	<dt><label for="recaptcha_require_remote_ip">{L_RECAPTCHA_REQUIRE_REMOTE_IP}:</label><br /><span>{L_RECAPTCHA_REQUIRE_REMOTE_IP_EXPLAIN}</span></dt>
+	<dd>
+		<label><input name="recaptcha_require_remote_ip" class="radio" type="radio" value="1"<!-- IF RECAPTCHA_REQUIRE_REMOTE_IP -->checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+		<label><input name="recaptcha_require_remote_ip" class="radio" type="radio" value="0"<!-- IF not RECAPTCHA_REQUIRE_REMOTE_IP -->checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+	</dd>
+</dl>
+
+<dl>
+	<dt><label for="recaptcha_language">{L_RECAPTCHA_LANGUAGE}:</label><br /><span>{L_RECAPTCHA_LANGUAGE_EXPLAIN}</span></dt>
+	<dd><input id="recaptcha_language" name="recaptcha_language" value="{RECAPTCHA_LANGUAGE}" size="5" type="text" /></dd>
 </dl>
 
 <dl>
@@ -81,9 +106,27 @@
 	<dd>
 		<label><input name="recaptcha_v3_load_all" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v3_load_all_guests_only').hidden=false;" value="1"<!-- IF RECAPTCHA_V3_LOAD_ALL -->checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 		<label><input name="recaptcha_v3_load_all" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v3_load_all_guests_only').hidden=true;" value="0"<!-- IF not RECAPTCHA_V3_LOAD_ALL -->checked="checked"<!-- ENDIF --> /> {L_NO}</label><br/><br/>
+		<input name="recaptcha_v3_load_all_guests_only" type="hidden" value="0" aria-label="hidden" />
 		<label<!-- IF not RECAPTCHA_V3_LOAD_ALL --> hidden<!-- ENDIF --> id="recaptcha_v3_load_all_guests_only"><input name="recaptcha_v3_load_all_guests_only" class="radio" type="checkbox" value="1"<!-- IF RECAPTCHA_V3_LOAD_ALL_GUESTS_ONLY -->checked="checked"<!-- ENDIF -->/> {L_RECAPTCHA_V3_LOAD_ALL_GUESTS_ONLY}</label>
 	</dd>
 </dl>
+</fieldset>
+
+<fieldset id="v3_actions"<!-- IF RECAPTCHA_VERSION != "v3" --> hidden<!-- ENDIF -->>
+	<legend>{L_RECAPTCHA_V3_ACTIONS}</legend>
+	<p>{L_RECAPTCHA_V3_ACTIONS_EXPLAIN}</p>
+
+	<!-- BEGIN actions -->
+	<dl>
+		<dt>
+			<label for="{actions.KEY}">{actions.L_KEY}</label>
+			<!-- IF actions.L_KEY_EXPLAIN -->
+				<br><span>{actions.L_KEY_EXPLAIN}</span>
+			<!-- ENDIF -->
+		</dt>
+		<dd><input id="{actions.KEY}" name="{actions.KEY}" type="text" value="{actions.VALUE}" placeholder="{actions.PLACEHOLDER}"></dd>
+	</dl>
+	<!-- END actions -->
 </fieldset>
 
 <fieldset id="v3_thresholds"<!-- IF RECAPTCHA_VERSION != "v3" --> hidden<!-- ENDIF -->>

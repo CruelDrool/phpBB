@@ -748,7 +748,9 @@ $lang = array_merge($lang, array(
 	'LOG_WORD_DELETE'		=> '<strong>Deleted word censor</strong><br />» %s',
 	'LOG_WORD_EDIT'			=> '<strong>Edited word censor</strong><br />» %s',
 	
-	'LOG_RECAPTCHA_VERIFY_ERROR' => '<strong>Error while verifying reCAPTCHA response token</strong><br />» %s',
+	'LOG_RECAPTCHA_CURL_ERROR' => '<strong>reCAPTCHA - cURL error when connecting to the verification server</strong><br />» Error %1$d: %2$s',
+	'LOG_RECAPTCHA_WRONG_RESPONSE_CODE' => '<strong>reCAPTCHA - HTTP response code from the verification server was other than “200”</strong><br />» Response code: %d',
+	'LOG_RECAPTCHA_VERIFY_ERROR' => '<strong>reCAPTCHA - JSON response data from the verification server contained error codes</strong><br />» %s',
 ));
 
 ?>
