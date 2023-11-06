@@ -13,9 +13,9 @@
 <dl>
 	<dt><label for="recaptcha_version">{L_RECAPTCHA_VERSION}:</label><br /><span>{L_RECAPTCHA_VERSION_EXPLAIN}</span></dt>
 	<dd>
-		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v2_checkbox_error_message').hidden=false;document.getElementById('recaptcha_v2_invisible_error_message').hidden=true;document.getElementById('recaptcha_v3_error_message').hidden=true;document.getElementById('recaptcha_v2_checkbox_size').hidden=false;document.getElementById('v3_thresholds').hidden=true;document.getElementById('v3_actions').hidden=true;document.getElementById('recaptcha_placement').hidden=true;document.getElementById('recaptcha_v3_load_all').hidden=true;" value="v2_checkbox"<!-- IF RECAPTCHA_VERSION == "v2_checkbox" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_CHECKBOX}</label>
-		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v2_checkbox_error_message').hidden=true;document.getElementById('recaptcha_v2_invisible_error_message').hidden=false;document.getElementById('recaptcha_v3_error_message').hidden=true;document.getElementById('recaptcha_v2_checkbox_size').hidden=true;document.getElementById('v3_thresholds').hidden=true;document.getElementById('v3_actions').hidden=true;document.getElementById('recaptcha_placement').hidden=false;document.getElementById('recaptcha_v3_load_all').hidden=true;" value="v2_invisible"<!-- IF RECAPTCHA_VERSION == "v2_invisible" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_INVISIBLE}</label>
-		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v2_checkbox_error_message').hidden=true;document.getElementById('recaptcha_v2_invisible_error_message').hidden=true;document.getElementById('recaptcha_v3_error_message').hidden=false;document.getElementById('recaptcha_v2_checkbox_size').hidden=true;document.getElementById('v3_thresholds').hidden=false;document.getElementById('v3_actions').hidden=false;document.getElementById('recaptcha_placement').hidden=false;document.getElementById('recaptcha_v3_load_all').hidden=false;" value="v3"<!-- IF RECAPTCHA_VERSION == "v3" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V3}</label>
+		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="show_hide_fields(this.value)" value="v2_checkbox"<!-- IF RECAPTCHA_VERSION == "v2_checkbox" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_CHECKBOX}</label>
+		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="show_hide_fields(this.value)" value="v2_invisible"<!-- IF RECAPTCHA_VERSION == "v2_invisible" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_INVISIBLE}</label>
+		<label><input name="recaptcha_version" class="radio" type="radio" OnClick="show_hide_fields(this.value)" value="v3"<!-- IF RECAPTCHA_VERSION == "v3" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V3}</label>
 	</dd>
 </dl>
 <dl>
@@ -27,17 +27,17 @@
 	<dd><input id="recaptcha_privkey" name="recaptcha_privkey" value="{RECAPTCHA_PRIVKEY}" size="50" type="text" autocomplete="off" /></dd>
 </dl>
 
-<dl id="recaptcha_v2_checkbox_error_message" <!-- IF RECAPTCHA_VERSION != "v2_checkbox" --> hidden<!-- ENDIF -->>
+<dl class="hidden show-field-for-v2_checkbox">
 	<dt><label for="recaptcha_v2_checkbox_error_message_text">{L_RECAPTCHA_ERROR_MESSAGE}</label><br/><span>{L_RECAPTCHA_ERROR_MESSAGE_EXPLAIN}</span></dt>
 	<dd><textarea rows="5" cols="45" name="recaptcha_v2_checkbox_error_message" id="recaptcha_v2_checkbox_error_message_text" placeholder="{L_RECAPTCHA_V2_CHECKBOX_INCORRECT}">{RECAPTCHA_V2_CHECKBOX_ERROR_MESSAGE}</textarea></dd>
 </dl>
 
-<dl id="recaptcha_v2_invisible_error_message" <!-- IF RECAPTCHA_VERSION != "v2_invisible" --> hidden<!-- ENDIF -->>
+<dl class="hidden show-field-for-v2_invisible">
 	<dt><label for="recaptcha_v2_invisible_error_message_text">{L_RECAPTCHA_ERROR_MESSAGE}</label><br/><span>{L_RECAPTCHA_ERROR_MESSAGE_EXPLAIN}</span></dt>
 	<dd><textarea rows="5" cols="45" name="recaptcha_v2_invisible_error_message" id="recaptcha_v2_invisible_error_message_text" placeholder="{L_RECAPTCHA_V2_INVISIBLE_INCORRECT}">{RECAPTCHA_V2_INVISIBLE_ERROR_MESSAGE}</textarea></dd>
 </dl>
 
-<dl id="recaptcha_v3_error_message" <!-- IF RECAPTCHA_VERSION != "v3" --> hidden<!-- ENDIF -->>
+<dl class="hidden show-field-for-v3">
 	<dt><label for="recaptcha_v3_error_message_text">{L_RECAPTCHA_ERROR_MESSAGE}</label><br/><span>{L_RECAPTCHA_ERROR_MESSAGE_EXPLAIN}</span></dt>
 	<dd><textarea rows="5" cols="45" name="recaptcha_v3_error_message" id="recaptcha_v3_error_message_text" placeholder="{L_RECAPTCHA_V3_INCORRECT}">{RECAPTCHA_V3_ERROR_MESSAGE}</textarea></dd>
 </dl>
@@ -85,14 +85,14 @@
 		<label><input name="recaptcha_theme" class="radio" type="radio" value="dark"<!-- IF RECAPTCHA_THEME == "dark" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_THEME_DARK}</label>
 	</dd>
 </dl>
-<dl id="recaptcha_v2_checkbox_size" <!-- IF RECAPTCHA_VERSION != "v2_checkbox" --> hidden<!-- ENDIF -->>
+<dl class="hidden show-field-for-v2_checkbox">
 	<dt><label for="recaptcha_v2_checkbox_size">{L_RECAPTCHA_V2_CHECKBOX_SIZE}:</label><br /><span>{L_RECAPTCHA_V2_CHECKBOX_SIZE_EXPLAIN}</span></dt>
 	<dd>
 		<label><input name="recaptcha_v2_checkbox_size" class="radio" type="radio" value="normal"<!-- IF RECAPTCHA_V2_CHECKBOX_SIZE == "normal"  -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_CHECKBOX_SIZE_NORMAL}</label>
 		<label><input name="recaptcha_v2_checkbox_size" class="radio" type="radio" value="compact"<!-- IF RECAPTCHA_V2_CHECKBOX_SIZE == "compact" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_V2_CHECKBOX_SIZE_COMPACT}</label>
 	</dd>
 </dl>
-<dl id="recaptcha_placement" <!-- IF RECAPTCHA_VERSION == "v2_checkbox" --> hidden<!-- ENDIF -->>
+<dl class="hidden show-field-for-v2_invisible show-field-for-v3">
 	<dt><label for="recaptcha_placement">{L_RECAPTCHA_PLACEMENT}:</label><br /><span>{L_RECAPTCHA_PLACEMENT_EXPLAIN}</span></dt>
 	<dd>
 		<label><input name="recaptcha_placement" class="radio" type="radio" value="bottomleft"<!-- IF RECAPTCHA_PLACEMENT == "bottomleft" -->checked="checked"<!-- ENDIF --> /> {L_RECAPTCHA_PLACEMENT_BOTTOMLEFT}</label>
@@ -101,7 +101,7 @@
 	</dd>
 </dl>
 
-<dl id="recaptcha_v3_load_all" <!-- IF RECAPTCHA_VERSION != "v3" --> hidden<!-- ENDIF -->>
+<dl class="hidden show-field-for-v3">
 	<dt><label for="recaptcha_v3_load_all">{L_RECAPTCHA_V3_LOAD_ALL}:</label><br /><span>{L_RECAPTCHA_V3_LOAD_ALL_EXPLAIN}</span></dt>
 	<dd>
 		<label><input name="recaptcha_v3_load_all" class="radio" type="radio" OnClick="document.getElementById('recaptcha_v3_load_all_guests_only').hidden=false;" value="1"<!-- IF RECAPTCHA_V3_LOAD_ALL -->checked="checked"<!-- ENDIF --> /> {L_YES}</label>
@@ -112,7 +112,7 @@
 </dl>
 </fieldset>
 
-<fieldset id="v3_actions"<!-- IF RECAPTCHA_VERSION != "v3" --> hidden<!-- ENDIF -->>
+<fieldset id="v3_actions" class="hidden show-field-for-v3">
 	<legend>{L_RECAPTCHA_V3_ACTIONS}</legend>
 	<p>{L_RECAPTCHA_V3_ACTIONS_EXPLAIN}</p>
 
@@ -129,7 +129,7 @@
 	<!-- END actions -->
 </fieldset>
 
-<fieldset id="v3_thresholds"<!-- IF RECAPTCHA_VERSION != "v3" --> hidden<!-- ENDIF -->>
+<fieldset id="v3_thresholds" class="hidden show-field-for-v3">
 	<legend>{L_RECAPTCHA_V3_THRESHOLDS}</legend>
 	<p>{L_RECAPTCHA_V3_THRESHOLDS_EXPLAIN}</p>
 
@@ -169,5 +169,19 @@
 	{S_FORM_TOKEN}
 </fieldset>
 </form>
+<script>
 
+function show_hide_fields(version) {
+	document.querySelectorAll( '#acp_captcha .hidden' ).forEach(function (element) {
+		element.style.display = 'none';
+	});
+
+	document.querySelectorAll( '#acp_captcha .show-field-for-'+ version ).forEach(function (element) {
+		element.style.display = '';
+	});
+}
+
+show_hide_fields('{RECAPTCHA_VERSION}');
+
+</script>
 <!-- INCLUDE overall_footer.html -->
