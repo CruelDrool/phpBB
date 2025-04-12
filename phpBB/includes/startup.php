@@ -20,7 +20,7 @@ if (!defined('E_DEPRECATED'))
 	define('E_DEPRECATED', 8192);
 }
 $level = E_ALL & ~E_NOTICE & ~E_DEPRECATED;
-if (version_compare(PHP_VERSION, '5.4.0-dev', '>='))
+if (version_compare(PHP_VERSION, '5.4.0-dev', '>=') && version_compare(PHP_VERSION, '8.4.0-dev', '<'))
 {
 	// PHP 5.4 adds E_STRICT to E_ALL.
 	// Our utf8 normalizer triggers E_STRICT output on PHP 5.4.
