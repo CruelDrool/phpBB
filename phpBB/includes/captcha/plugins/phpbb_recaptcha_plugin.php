@@ -579,7 +579,9 @@ HTML;
 		$error_code = curl_errno($handle);
 		$error_msg = curl_error($handle);
 		$response_code = curl_getinfo($handle, CURLINFO_RESPONSE_CODE);
-		curl_close($handle);
+		if (is_resource($handle)) {
+			curl_close($handle);
+		}
 
 		if ( $error_code > 0 ) {
 			add_log('critical', 'LOG_'.self::NAME_PREFIX_LANG.'CURL_ERROR', $error_code, $error_msg);
