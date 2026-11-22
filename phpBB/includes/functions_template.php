@@ -614,7 +614,7 @@ class template_compile
 				break;
 
 				case '.':
-					$match[4] = doubleval($match[4]);
+					$match[4] = floatval($match[4]);
 				break;
 
 				default:

@@ -769,7 +769,9 @@ function create_thumbnail($source, $destination, $mimetype)
 				break;
 			}
 
-			imagedestroy($new_image);
+			if (is_resource($new_image)) {
+				imagedestroy($new_image);
+			}
 		}
 		else
 		{

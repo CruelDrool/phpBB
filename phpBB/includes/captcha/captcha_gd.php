@@ -161,7 +161,9 @@ class captcha
 		header('Content-Type: image/png');
 		header('Cache-control: no-cache, no-store');
 		imagepng($img);
-		imagedestroy($img);
+		if (is_resource($img)) {
+			imagedestroy($img);
+		}
 	}
 
 	/**

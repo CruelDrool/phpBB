@@ -20,7 +20,7 @@ include($phpbb_root_path . 'common.'.$phpEx);
 include($phpbb_root_path . 'includes/post.'.$phpEx);
 include($phpbb_root_path . 'includes/bbcode.'.$phpEx);
 
-srand ((double) microtime() * 1000000);
+srand ((float) microtime() * 1000000);
 set_time_limit(240*60);
 
 // Here's the text we stick in posts..

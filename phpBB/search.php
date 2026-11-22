@@ -95,7 +95,7 @@ if (!$auth->acl_get('u_search') || !$auth->acl_getf_global('f_search') || !$conf
 }
 
 // Check search load limit
-if ($user->load && $config['limit_search_load'] && ($user->load > doubleval($config['limit_search_load'])))
+if ($user->load && $config['limit_search_load'] && ($user->load > floatval($config['limit_search_load'])))
 {
 	$template->assign_var('S_NO_SEARCH', true);
 	trigger_error('NO_SEARCH_TIME');

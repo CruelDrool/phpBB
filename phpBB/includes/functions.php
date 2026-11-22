@@ -4641,7 +4641,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 	$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : $phpbb_root_path;
 
 	// Which timezone?
-	$tz = ($user->data['user_id'] != ANONYMOUS) ? strval(doubleval($user->data['user_timezone'])) : strval(doubleval($config['board_timezone']));
+	$tz = ($user->data['user_id'] != ANONYMOUS) ? strval(floatval($user->data['user_timezone'])) : strval(floatval($config['board_timezone']));
 
 	// Send a proper content-language to the output
 	$user_lang = $user->lang['USER_LANG'];

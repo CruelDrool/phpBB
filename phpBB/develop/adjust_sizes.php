@@ -26,7 +26,7 @@ $echos = 0;
 
 function replace_size($matches)
 {
-	return '[size=' . ceil(100.0 * (((double) $matches[1])/12.0)) . ':' . $matches[2] . ']';
+	return '[size=' . ceil(100.0 * (((float) $matches[1])/12.0)) . ':' . $matches[2] . ']';
 }
 
 // Adjust user signatures

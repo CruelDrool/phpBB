@@ -254,7 +254,9 @@ class captcha
 		//echo $totaltime . "<br />\n";
 		//echo memory_get_usage() - $tmp;
 		imagepng($img);
-		imagedestroy($img);
+		if (is_resource($img)) {
+			imagedestroy($img);
+		}
 	}
 
 	function wave_height($x, $y, $factor = 1, $tweak = 0.7)

@@ -607,7 +607,7 @@ else
 	function utf8_strlen($text)
 	{
 		// Since utf8_decode is replacing multibyte characters to ? strlen works fine
-		return strlen(utf8_decode($text));
+		return strlen(mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8'));
 	}
 }
 

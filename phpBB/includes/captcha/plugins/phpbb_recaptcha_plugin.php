@@ -342,11 +342,11 @@ HTML;
 	}
 
 	/**
-	 * Sanitizes a v3 threshold value to ensure it's a double value between 0.0 and 1.0.
+	 * Sanitizes a v3 threshold value to ensure it's a float value between 0.0 and 1.0.
 	 *
 	 * @param string $value 
 	 *
-	 * @return double
+	 * @return float
 	 */
 	function sanitize_threshold_value($value) {
 		$value = floatval($value);
@@ -649,7 +649,7 @@ HTML;
 			if ( $result['success'] == true ) {	
 				if ($version == 'v3') {
 					$form = self::FORMS[$this->type] ?? self::FORMS[0];
-					$threshold = (double) self::get_option("v3_threshold_{$form}", self::DEFAULTS['v3_threshold']);
+					$threshold = (float) self::get_option("v3_threshold_{$form}", self::DEFAULTS['v3_threshold']);
 					$expected_action = self::get_option("v3_action_{$form}", $form);
 
 					$score = $result['score'] ?? 0.0;
